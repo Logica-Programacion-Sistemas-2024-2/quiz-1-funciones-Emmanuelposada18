@@ -3,54 +3,126 @@
  */
 package quiz1sistemasg2;
 
-public class App {
-    
+import java.util.Scanner;
+
+public class Parqueadero {
 
     public static void main(String[] args) {
-        
-       
+        Scanner sc = new Scanner(System.in);
 
+        // Solicitar tipo de vehículo
+        System.out.print("Ingrese el tipo de vehículo estacionado ( \nC: Carro, \nM: Moto, \nB: Bicicleta): ");
+        char tipoVehiculo = sc.nextLine().charAt(0);
+
+        // Solicitar número de horas
+        System.out.print("Ingrese el número de horas de permanencia: ");
+        int horas = sc.nextInt();
+
+        // Solicitar si es estudiante
+        System.out.print("¿Es estudiante? (\n1: Sí, \n2: No): ");
+        int esEstudiante = sc.nextInt();
+        boolean esEstudianteBoolean = (esEstudiante == 1);
+
+        // Imprimir factura
+        System.out.println("\nFactura del parqueadero:");
+        System.out.println("Tipo de vehículo estacionado: " + tipoVehiculo);
+        System.out.println("Horas de permanencia: " + horas);
+        System.out.println("Valor total antes de descuentos: $");
+        System.out.println("Valor total después de descuentos: $");
+
+        sc.close();
     }
 
-    /*  Implemente una funcion llamada calcularValorHora que cumpla con las siguientes caracteristicas
-        * Recibe: 
-            - Una cadena de caracteres que representa el tipo de vehiculo (C, M o B)
-            - Un entero que representa la cantidad de horas de permanencia
-        * Retorna:
-            - Un entero representando el valor total de las boletas
-        * Controlar errores retornando -1
-    */
-    //------------------------------------------------------------------
-    
+    public static double valorBase(char tipoVehiculo, int horas) {
+        double tarifaPorHora;
+        switch (tipoVehiculo) {
+            case 'C':
+                tarifaPorHora = 5000;
+                break;
+            case 'M':
+                tarifaPorHora = 3000;
+                break;
+            case 'B':
+                tarifaPorHora = 1000;
+                break;
+        }
+        return tarifaPorHora;
+    }
+    // Función para calcular valor adicional
+    public static int ValorHora(String tipoVehiculo, int valorBase, byte tiempo) {
 
+        try {
+            int valorHora = 0;
 
-    //------------------------------------------------------------------
+            if (tipoVehiculo.equals("C")) {
+                valorHora = valorBase + (2000 * (tiempo - 3));
 
-    /*  Implemente una funcion llamada calcularDescuento que cumpla con las siguientes caracteristicas
-        * Recibe:
-            - Un entero representando el valor total de las horas
-            - Un entero representando la si es estudiante o no
-            - Un entero represenatando la cantidad de horas
-        * Retorna:
-            - Un entero representando el valor del descuento
-        * Controlar errores retornando -1
-    */
-    //------------------------------------------------------------------
-    
+            } else if (tipoVehiculo.equals("M")) {
+                valorHora = valorBase + (2000 * (tiempo - 3));
 
+            } else if (tipoVehiculo.equals("B")) {
+                valorHora = valorBase + (2000 * (tiempo - 3));
 
-    //------------------------------------------------------------------
+            }
 
-    /*  Implemente una funcion llamada calcularFactura que cumpla con las siguientes caracteristicas
-        * Recibe:
-            - Un entero representando el valor total de las horas
-            - Un entero representando el valor del descuento
-        * Retorna:
-            - Un entero representando el valor del total de la factura incluyendo el iva
-    */
-    //------------------------------------------------------------------
-    
+            return valorHora;
 
+        } catch (Exception e) {
 
-    //------------------------------------------------------------------
+            return -1;
+        }
+    }
+
+    public static double calcularDescuentos(double valorTotal, int horas, boolean esEstudiante) {
+        if (horas > 4) {
+            valorTotal *= 0.7; // Aplicar descuento del 30%
+        }
+        if (esEstudiante) {
+            valorTotal *= 0.95; // Aplicar descuento adicional del 5%
+        }
+
+        return valorTotal;
+    }
+
 }
+/*
+ * Implemente una funcion llamada calcularValorHora que cumpla con las
+ * siguientes caracteristicas
+ * Recibe:
+ * - Una cadena de caracteres que representa el tipo de vehiculo (C, M o B)
+ * - Un entero que representa la cantidad de horas de permanencia
+ * Retorna:
+ * - Un entero representando el valor total de las boletas
+ * Controlar errores retornando -1
+ */
+// ------------------------------------------------------------------
+
+// ------------------------------------------------------------------
+
+/*
+ * Implemente una funcion llamada calcularDescuento que cumpla con las
+ * siguientes caracteristicas
+ * Recibe:
+ * - Un entero representando el valor total de las horas
+ * - Un entero representando la si es estudiante o no
+ * - Un entero represenatando la cantidad de horas
+ * Retorna:
+ * - Un entero representando el valor del descuento
+ * Controlar errores retornando -1
+ */
+// ------------------------------------------------------------------
+
+// ------------------------------------------------------------------
+
+/*
+ * Implemente una funcion llamada calcularFactura que cumpla con las siguientes
+ * caracteristicas
+ * Recibe:
+ * - Un entero representando el valor total de las horas
+ * - Un entero representando el valor del descuento
+ * Retorna:
+ * - Un entero representando el valor del total de la factura incluyendo el iva
+ */
+// ------------------------------------------------------------------
+
+// ------------------------------------------------------------------
